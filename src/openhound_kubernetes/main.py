@@ -1,5 +1,6 @@
 from typing import Tuple
 
+import dlt
 from dlt.extract.source import DltSource
 from openhound.core.app import OpenHound
 from openhound.core.collect import CollectContext
@@ -65,9 +66,8 @@ def convert(ctx: ConvertContext) -> Tuple[DltSource, dict]:
         ctx (ConvertContext): Returns DLT pipeline context.
     """
     from openhound_kubernetes.source import source as kube_source
-    from kubernetes import config
 
-    contexts, active = config.list_kube_config_contexts()
-    extras = {"cluster": active["context"]["cluster"]}
+    cluster_name = dlt.config.get("sources.source.kubernetes.cluster_name", str)
+    extras = {"cluster": cluster_name}
 
     return kube_source(), extras
