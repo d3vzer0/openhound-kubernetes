@@ -1,0 +1,21 @@
+name: kubernetes
+version: 0.3.4
+description: "Kubernetes resource collector for OpenHound"
+authors:
+  - name: Joey Dreijer
+    email: jdreijer@specterops.io
+
+type: local
+license: MIT
+homepage: https://github.com/specterops/openhound-kubernetes
+references:
+  - name: OpenHound
+    url: https://github.com/specterops/openhound
+
+parameters:
+  - name: kube_config
+    description: Path to the kubeconfig file
+    required: false
+    default: ~/.kube/config
+
+tags: [ "kubernetes", "source", "opengraph" ]
