@@ -1,0 +1,12 @@
+
+image: localhost/openhound
+imagePullPolicy: IfNotPresent
+
+rbac:
+  enabled: true
+
+job:
+  backoffLimit: 0
+  restartPolicy: Never
+  command: ["python", "main.py"]
+  args: ["collect", "kubernetes", "/tmp/", "--progress", "log"]

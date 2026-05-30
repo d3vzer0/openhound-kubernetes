@@ -1,0 +1,2 @@
+GITHUB_REPOSITORY = "GH_Repository"
+GITHUB_RUNNER = "GH_RepoRunner"

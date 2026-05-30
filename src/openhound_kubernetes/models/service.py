@@ -1,0 +1,22 @@
+from datetime import datetime
+
+from pydantic import BaseModel
+
+
+class Spec(BaseModel):
+    type: str
+    selector: dict | None = None
+
+
+class Metadata(BaseModel):
+    name: str
+    uid: str
+    creation_timestamp: datetime | None = None
+    labels: dict | None = None
+    namespace: str
+
+
+class Service(BaseModel):
+    metadata: Metadata
+    spec: Spec
+    kind: str | None = "Service"

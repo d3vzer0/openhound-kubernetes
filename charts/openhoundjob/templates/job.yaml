@@ -1,0 +1,24 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: "openhound-kubernetes-{{ now | unixEpoch }}"
+spec:
+  backoffLimit: {{ .Values.job.backoffLimit }}
+  template:
+    spec:
+      {{- if .Values.rbac.enabled }}
+      serviceAccountName: "openhound-sa"
+      {{- end }}
+      restartPolicy: "{{ .Values.job.restartPolicy }}"
+      containers:
+        - name: "{{ .Chart.Name }}"
+          image: "{{ .Values.image }}"
+          imagePullPolicy: "{{ .Values.pullPolicy }}"
+          {{- if .Values.job.command }}
+          command:
+{{ toYaml .Values.job.command | indent 12 }}
+          {{- end }}
+          {{- if .Values.job.args }}
+          args:
+{{ toYaml .Values.job.args | indent 12 }}
+          {{- end }}

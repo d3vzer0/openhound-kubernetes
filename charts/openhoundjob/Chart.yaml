@@ -1,0 +1,4 @@
+apiVersion: v2
+name: openhound-kubernetes
+version: 0.1.0
+description: Helm chart for running openhound-kubernetes as a Job

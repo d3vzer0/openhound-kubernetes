@@ -1,0 +1,410 @@
+{
+  "schema": {
+    "name": "Kubernetes",
+    "display_name": "Kubernetes Extension (by d3vzer0)",
+    "version": "v0.1.1",
+    "namespace": "K8s"
+  },
+  "node_kinds": [
+    {
+      "name": "K8s_Cluster",
+      "display_name": "Kubernetes Cluster",
+      "description": "A Kubernetes cluster",
+      "is_display_kind": true,
+      "icon": "globe",
+      "color": "#16a5a5"
+    },
+    {
+      "name": "K8s_Namespace",
+      "display_name": "Kubernetes Namespace",
+      "description": "A Kubernetes namespace that scopes namespaced resources",
+      "is_display_kind": true,
+      "icon": "folder-tree",
+      "color": "#73d8ff"
+    },
+    {
+      "name": "K8s_ScopedRole",
+      "display_name": "Kubernetes Scoped Role",
+      "description": "A namespaced Kubernetes role that grants permissions within a namespace",
+      "is_display_kind": true,
+      "icon": "id-badge",
+      "color": "#3e8e41"
+    },
+    {
+      "name": "K8s_ScopedRoleBinding",
+      "display_name": "Kubernetes Scoped Role Binding",
+      "description": "A namespaced Kubernetes role binding that assigns a role to subjects",
+      "is_display_kind": true,
+      "icon": "link",
+      "color": "#fda1ff"
+    },
+    {
+      "name": "K8s_Node",
+      "display_name": "Kubernetes Node",
+      "description": "A Kubernetes worker node",
+      "is_display_kind": true,
+      "icon": "server",
+      "color": "#4971bc"
+    },
+    {
+      "name": "K8s_Pod",
+      "display_name": "Kubernetes Pod",
+      "description": "A Kubernetes pod running one or more containers",
+      "is_display_kind": true,
+      "icon": "cube",
+      "color": "#68bc00"
+    },
+    {
+      "name": "K8s_ServiceAccount",
+      "display_name": "Kubernetes Service Account",
+      "description": "A Kubernetes service account used by workloads to authenticate to the API server",
+      "is_display_kind": true,
+      "icon": "robot",
+      "color": "#d33115"
+    },
+    {
+      "name": "K8s_ClusterRole",
+      "display_name": "Kubernetes Cluster Role",
+      "description": "A cluster-scoped Kubernetes role that grants permissions across the cluster",
+      "is_display_kind": true,
+      "icon": "clipboard-list",
+      "color": "#3e8e41"
+    },
+    {
+      "name": "K8s_ClusterRoleBinding",
+      "display_name": "Kubernetes Cluster Role Binding",
+      "description": "A cluster-scoped Kubernetes role binding that assigns a cluster role to subjects",
+      "is_display_kind": true,
+      "icon": "clipboard-check",
+      "color": "#fda1ff"
+    },
+    {
+      "name": "K8s_Resource",
+      "display_name": "Kubernetes Resource",
+      "description": "A generic Kubernetes resource instance",
+      "is_display_kind": true,
+      "icon": "shapes",
+      "color": "#e6b65b"
+    },
+    {
+      "name": "K8s_ResourceDefinition",
+      "display_name": "Kubernetes Resource Definition",
+      "description": "A Kubernetes API resource definition",
+      "is_display_kind": true,
+      "icon": "file-code",
+      "color": "#aea1ff"
+    },
+    {
+      "name": "K8s_ResourceGroup",
+      "display_name": "Kubernetes Resource Group",
+      "description": "A Kubernetes API group containing related resource definitions",
+      "is_display_kind": true,
+      "icon": "layer-group",
+      "color": "#fb9e00"
+    },
+    {
+      "name": "K8s_User",
+      "display_name": "Kubernetes User",
+      "description": "A Kubernetes user principal referenced by role bindings",
+      "is_display_kind": true,
+      "icon": "user",
+      "color": "#d33115"
+    },
+    {
+      "name": "K8s_Group",
+      "display_name": "Kubernetes Group",
+      "description": "A Kubernetes group principal referenced by role bindings",
+      "is_display_kind": true,
+      "icon": "users",
+      "color": "#fcdc00"
+    },
+    {
+      "name": "K8s_ReplicaSet",
+      "display_name": "Kubernetes ReplicaSet",
+      "description": "A Kubernetes ReplicaSet workload controller",
+      "is_display_kind": true,
+      "icon": "copy",
+      "color": "#68bc00"
+    },
+    {
+      "name": "K8s_StatefulSet",
+      "display_name": "Kubernetes StatefulSet",
+      "description": "A Kubernetes StatefulSet workload controller",
+      "is_display_kind": true,
+      "icon": "database",
+      "color": "#68bc00"
+    },
+    {
+      "name": "K8s_Deployment",
+      "display_name": "Kubernetes Deployment",
+      "description": "A Kubernetes Deployment workload controller",
+      "is_display_kind": true,
+      "icon": "rocket",
+      "color": "#68bc00"
+    },
+    {
+      "name": "K8s_DaemonSet",
+      "display_name": "Kubernetes DaemonSet",
+      "description": "A Kubernetes DaemonSet workload controller",
+      "is_display_kind": true,
+      "icon": "gears",
+      "color": "#68bc00"
+    },
+    {
+      "name": "K8s_Volume",
+      "display_name": "Kubernetes Volume",
+      "description": "A Kubernetes volume attached to a workload",
+      "is_display_kind": true,
+      "icon": "hard-drive",
+      "color": "#ff746c"
+    },
+    {
+      "name": "K8s_Role",
+      "display_name": "Kubernetes Role",
+      "description": "A Kubernetes role kind shared by namespaced and virtual roles",
+      "is_display_kind": true,
+      "icon": "id-badge",
+      "color": "#3e8e41"
+    },
+    {
+      "name": "K8s_RoleBinding",
+      "display_name": "Kubernetes Role Binding",
+      "description": "A Kubernetes role binding kind shared by namespaced and virtual role bindings",
+      "is_display_kind": true,
+      "icon": "link",
+      "color": "#fda1ff"
+    },
+    {
+      "name": "K8s_Secret",
+      "display_name": "Kubernetes Secret",
+      "description": "A Kubernetes secret containing sensitive data",
+      "is_display_kind": true,
+      "icon": "key",
+      "color": "#ff746c"
+    },
+    {
+      "name": "K8s_ConfigMap",
+      "display_name": "Kubernetes ConfigMap",
+      "description": "A Kubernetes ConfigMap containing non-sensitive configuration",
+      "is_display_kind": true,
+      "icon": "sliders",
+      "color": "#73d8ff"
+    },
+    {
+      "name": "K8s_PersistentVolumeClaim",
+      "display_name": "Kubernetes PersistentVolumeClaim",
+      "description": "A Kubernetes persistent volume claim requested by a workload",
+      "is_display_kind": true,
+      "icon": "database",
+      "color": "#ff746c"
+    },
+    {
+      "name": "K8s_PersistentVolume",
+      "display_name": "Kubernetes PersistentVolume",
+      "description": "A Kubernetes persistent volume backing storage claims",
+      "is_display_kind": true,
+      "icon": "hard-drive",
+      "color": "#ff746c"
+    },
+    {
+      "name": "K8s_Job",
+      "display_name": "Kubernetes Job",
+      "description": "A Kubernetes Job workload controller",
+      "is_display_kind": true,
+      "icon": "briefcase",
+      "color": "#68bc00"
+    },
+    {
+      "name": "K8s_CronJob",
+      "display_name": "Kubernetes CronJob",
+      "description": "A Kubernetes scheduled Job controller",
+      "is_display_kind": true,
+      "icon": "clock",
+      "color": "#68bc00"
+    }
+  ],
+  "relationship_kinds": [
+    {
+      "name": "K8s_Attaches",
+      "description": "Attachment relationship between a workload and a volume or mounted resource",
+      "is_traversable": true
+    },
+    {
+      "name": "K8s_Authorizes",
+      "description": "A role binding authorizes a Kubernetes subject",
+      "is_traversable": true
+    },
+    {
+      "name": "K8s_BelongsTo",
+      "description": "A Kubernetes object belongs to a namespace or parent scope",
+      "is_traversable": true
+    },
+    {
+      "name": "K8s_BindsTo",
+      "description": "A Kubernetes storage claim binds to backing storage",
+      "is_traversable": true
+    },
+    {
+      "name": "K8s_CanAll",
+      "description": "Permission to perform all Kubernetes verbs on a scoped resource",
+      "is_traversable": true
+    },
+    {
+      "name": "K8s_CanApprove",
+      "description": "Permission to approve Kubernetes certificate signing requests",
+      "is_traversable": true
+    },
+    {
+      "name": "K8s_CanBind",
+      "description": "Permission to bind Kubernetes roles",
+      "is_traversable": true
+    },
+    {
+      "name": "K8s_CanCreate",
+      "description": "Permission to create Kubernetes resources",
+      "is_traversable": true
+    },
+    {
+      "name": "K8s_CanDelete",
+      "description": "Permission to delete Kubernetes resources",
+      "is_traversable": true
+    },
+    {
+      "name": "K8s_CanDeleteCollection",
+      "description": "Permission to delete collections of Kubernetes resources",
+      "is_traversable": true
+    },
+    {
+      "name": "K8s_CanEscalate",
+      "description": "Permission to escalate Kubernetes role privileges",
+      "is_traversable": true
+    },
+    {
+      "name": "K8s_CanGet",
+      "description": "Permission to get Kubernetes resources",
+      "is_traversable": true
+    },
+    {
+      "name": "K8s_CanImpersonate",
+      "description": "Permission to impersonate Kubernetes users, groups, or service accounts",
+      "is_traversable": true
+    },
+    {
+      "name": "K8s_CanList",
+      "description": "Permission to list Kubernetes resources",
+      "is_traversable": true
+    },
+    {
+      "name": "K8s_CanPatch",
+      "description": "Permission to patch Kubernetes resources",
+      "is_traversable": true
+    },
+    {
+      "name": "K8s_CanProxy",
+      "description": "Permission to proxy Kubernetes resources",
+      "is_traversable": true
+    },
+    {
+      "name": "K8s_CanSign",
+      "description": "Permission to sign Kubernetes certificate signing requests",
+      "is_traversable": true
+    },
+    {
+      "name": "K8s_CanUpdate",
+      "description": "Permission to update Kubernetes resources",
+      "is_traversable": true
+    },
+    {
+      "name": "K8s_CanUse",
+      "description": "Permission to use Kubernetes resources such as pod security policies",
+      "is_traversable": true
+    },
+    {
+      "name": "K8s_CanWatch",
+      "description": "Permission to watch Kubernetes resources",
+      "is_traversable": true
+    },
+    {
+      "name": "K8s_Contains",
+      "description": "Containment relationship between a Kubernetes cluster or scope and its objects",
+      "is_traversable": true
+    },
+    {
+      "name": "K8s_HasPermissions",
+      "description": "A Kubernetes role grants permissions to resources",
+      "is_traversable": true
+    },
+    {
+      "name": "K8s_HostedOn",
+      "description": "A Kubernetes object is hosted on a node",
+      "is_traversable": true
+    },
+    {
+      "name": "K8s_InResourceGroup",
+      "description": "A Kubernetes resource definition belongs to an API resource group",
+      "is_traversable": true
+    },
+    {
+      "name": "K8s_InheritsRole",
+      "description": "A Kubernetes subject inherits a role through a binding",
+      "is_traversable": true
+    },
+    {
+      "name": "K8s_MemberOf",
+      "description": "Membership relationship between Kubernetes principals or groups",
+      "is_traversable": true
+    },
+    {
+      "name": "K8s_Mounts",
+      "description": "A Kubernetes workload mounts a persistent volume claim",
+      "is_traversable": true
+    },
+    {
+      "name": "K8s_OwnedBy",
+      "description": "Kubernetes owner reference relationship between resources",
+      "is_traversable": true
+    },
+    {
+      "name": "K8s_ReferencesRole",
+      "description": "A Kubernetes role binding references a role or cluster role",
+      "is_traversable": true
+    },
+    {
+      "name": "K8s_RunsAs",
+      "description": "A Kubernetes workload runs as a service account or identity",
+      "is_traversable": true
+    },
+    {
+      "name": "K8s_RunsActionsFor",
+      "description": "A GitHub runner runs GitHub Actions workload as a Kubernetes pod",
+      "is_traversable": true
+    },
+    {
+      "name": "K8s_RunsOn",
+      "description": "A Kubernetes workload runs on a node",
+      "is_traversable": true
+    },
+    {
+      "name": "K8s_StaleReference",
+      "description": "A Kubernetes object references a missing or stale target",
+      "is_traversable": false
+    },
+    {
+      "name": "K8s_Uses",
+      "description": "A Kubernetes workload uses a configuration or secret resource",
+      "is_traversable": true
+    }
+  ],
+  "environments": [
+    {
+      "environment_kind": "K8s_Cluster",
+      "source_kind": "K8s",
+      "principal_kinds": [
+        "K8s_User",
+        "K8s_Group",
+        "K8s_ServiceAccount"
+      ]
+    }
+  ],
+  "relationship_findings": []
+}

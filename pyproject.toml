@@ -1,0 +1,39 @@
+[project]
+name = "openhound-kubernetes"
+dynamic = ["version"]
+description = "OpenGraph collector for Kubernetes using OpenHound"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "kubernetes>=35.0.0"
+]
+authors = [
+    { name = "jdreijer@specterops.io", email = "jdreijer@specterops.io" }
+]
+
+[build-system]
+requires = ['hatchling', 'hatch-vcs']
+build-backend = 'hatchling.build'
+
+[tool.hatch.version]
+source = "vcs"
+
+[tool.hatch.version.raw-options]
+local_scheme = "no-local-version"
+
+[tool.hatch.build.targets.wheel.force-include]
+"extension.yaml" = "openhound_kubernetes/extension.yaml"
+
+[dependency-groups]
+dev = [
+    "openhound==0.1.4",
+    "pre-commit>=4.6.0",
+    "pytest>=9.0.3",
+    "ruff>=0.15.5",
+    "mypy>=1.19.1",
+    "zensical>=0.0.40",
+    "graphifyy==0.7.5",
+    "pyright==1.1.409",
+]
+[project.entry-points."openhound.sources"]
+kubernetes = "openhound_kubernetes.main:app"

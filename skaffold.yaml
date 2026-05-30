@@ -1,0 +1,22 @@
+
+apiVersion: skaffold/v4beta13
+kind: Config
+metadata:
+  name: openhound-kubernetes
+build:
+  local:
+    # tryImportMissing: true
+    useBuildkit: true
+  artifacts:
+    - image: localhost/openhound
+      docker:
+        dockerfile: Dockerfile
+        ssh: default
+
+deploy:
+  helm:
+    releases:
+      - name: openhound-kubernetes
+        chartPath: charts/openhoundjob
+        setValueTemplates:
+          image: "{{.IMAGE_FULLY_QUALIFIED_localhost_openhound}}"
