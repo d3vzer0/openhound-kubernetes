@@ -4,7 +4,6 @@ ui_catalog.db
 site/
 addons/
 collectors/
-notebooks
 output
 graph
 logs
