@@ -7,6 +7,7 @@ collectors/
 output
 graph
 logs
+graphify-out
 dbt_packages
 .vscode
 .idea
