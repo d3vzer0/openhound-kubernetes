@@ -33,7 +33,7 @@ dev = [
     "mypy>=1.19.1",
     "zensical>=0.0.40",
     "graphifyy==0.7.5",
-    "pyright==1.1.409",
+    "marimo>=0.23.8",
 ]
 [project.entry-points."openhound.sources"]
 kubernetes = "openhound_kubernetes.main:app"
