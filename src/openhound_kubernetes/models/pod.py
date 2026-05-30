@@ -22,7 +22,7 @@ from openhound_kubernetes.graph import (
 from openhound_kubernetes.graph import cluster_node_id
 from openhound_kubernetes.graph import labels_to_list
 from openhound_kubernetes.graph import match_by_properties
-from openhound_kubernetes.graph import resource_permission_path
+from openhound_kubernetes.graph import uid_path
 from openhound_kubernetes.kinds import edges as ek
 from openhound_kubernetes.kinds import external as xk
 from openhound_kubernetes.kinds import nodes as nk
@@ -398,25 +398,24 @@ class Pod(BaseAsset):
 
     @property
     def _service_account_edge(self) -> "Iterator[Edge]":
-        start_path = EdgePath(value=self.as_node.id, match_by="id")
-        end_path = match_by_properties(
-            nk.SERVICE_ACCOUNT,
-            name=self.spec.service_account_name,
-            namespace=self.metadata.namespace,
-            cluster=self._extras["cluster"],
-        )
-        yield Edge(kind=ek.RUNS_AS, start=start_path, end=end_path)
+        if self.spec.service_account_name:
+            start_path = EdgePath(value=self.as_node.id, match_by="id")
+            end_path = match_by_properties(
+                nk.SERVICE_ACCOUNT,
+                name=self.spec.service_account_name,
+                namespace=self.metadata.namespace,
+                cluster=self._extras["cluster"],
+            )
+            yield Edge(kind=ek.RUNS_AS, start=start_path, end=end_path)
 
     @property
     def _owned_by(self) -> "Iterator[Edge]":
         start_path = EdgePath(value=self.as_node.id, match_by="id")
         if self.metadata.owner_references:
             for owner in self.metadata.owner_references:
-                end_path = resource_permission_path(
-                    name=owner.name,
+                end_path = uid_path(
                     kind=owner.kind,
-                    namespace=self.metadata.namespace,
-                    cluster=self._extras["cluster"],
+                    uid=owner.uid,
                 )
                 yield Edge(kind=ek.OWNED_BY, start=start_path, end=end_path)
 
@@ -542,13 +541,13 @@ class Pod(BaseAsset):
 
     @property
     def edges(self) -> "Iterator[Edge]":
-        yield from self._cluster_contains_edge
-        yield from self._node_edge
-        yield from self._namespace_edge
-        yield from self._service_account_edge
+        # yield from self._cluster_contains_edge
+        # yield from self._node_edge
+        # yield from self._namespace_edge
+        # yield from self._service_account_edge
         yield from self._owned_by
-        yield from self._volume_edges
-        yield from self._secret_edges
-        yield from self._config_map_edges
-        yield from self._persistent_volume_claim_edges
+        # yield from self._volume_edges
+        # yield from self._secret_edges
+        # yield from self._config_map_edges
+        # yield from self._persistent_volume_claim_edges
         yield from pod_enrichment_edges(self)
