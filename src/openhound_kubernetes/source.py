@@ -1,6 +1,7 @@
 import os
 from dataclasses import dataclass
 
+import dlt
 from kubernetes import client, config
 from kubernetes.dynamic import DynamicClient
 from urllib3.util.retry import Retry
@@ -453,7 +454,7 @@ def unmapped_resources(resource: dict, ctx: SourceContext):
 
 
 @app.source(name="kubernetes", max_table_nesting=0)
-def source(kube_config: str = "~/.kube/config"):
+def source(kube_config: str = "~/.kube/config", cluster_name: str = dlt.config.value):
     """DLT source, defines Kubernetes collection resources and transformers.
 
     Args:
@@ -463,14 +464,10 @@ def source(kube_config: str = "~/.kube/config"):
     Returns:
         (tuple[pods, namespaces, nodes, service_accounts, deployments, replicasets, statefulsets, daemonsets, roles, role_bindings, cluster_roles, cluster_role_bindings, resource_definitions, api_groups, unmapped_resources, volumes, users_cluster_role, groups_cluster_role, users_role, groups_role, clusters]): A tuple of DLT resources/transformers registered for Kubernetes.
     """
-    in_cluster = False
     if os.getenv("KUBERNETES_SERVICE_HOST"):
         config.load_incluster_config()
-        in_cluster = True
     else:
         config.load_kube_config(kube_config)
-        contexts, active = config.list_kube_config_contexts()
-        cluster = active["context"]["cluster"]
 
     configuration = client.Configuration.get_default_copy()
     configuration.retries = Retry(
@@ -482,11 +479,9 @@ def source(kube_config: str = "~/.kube/config"):
     api_client = client.ApiClient(configuration=configuration)
     dyn_client = DynamicClient(api_client)
 
-    if in_cluster:
-        # TODO: Replace with unique in-cluster ID or hostname
-        cluster = "testing-cluster"
-
-    ctx = SourceContext(cluster=cluster, api_client=api_client, dyn_client=dyn_client)
+    ctx = SourceContext(
+        cluster=cluster_name, api_client=api_client, dyn_client=dyn_client
+    )
 
     pods_resource = pods(ctx)
     crb_resource = cluster_role_bindings(ctx)
