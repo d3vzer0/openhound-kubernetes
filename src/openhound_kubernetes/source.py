@@ -352,7 +352,7 @@ def users_cluster_role(role_binding):
             yield subject
 
 
-@app.transformer(name="cust_groups", columns=Group)
+@app.transformer(name="cust_groups_clusters", columns=Group)
 def groups_cluster_role(role_binding):
     """DLT transformer, extracts Group subjects from ClusterRoleBindings.
 
@@ -486,6 +486,7 @@ def source(kube_config: str = "~/.kube/config", cluster_name: str = dlt.config.v
     pods_resource = pods(ctx)
     crb_resource = cluster_role_bindings(ctx)
     rd_resource = resource_definitions(ctx)
+    rb_resource = role_bindings(ctx)
 
     return (
         pods_resource,
@@ -504,9 +505,9 @@ def source(kube_config: str = "~/.kube/config", cluster_name: str = dlt.config.v
         jobs(ctx),
         cron_jobs(ctx),
         roles(ctx),
-        # roles(ctx) | users_role,
-        # roles(ctx) | groups_role,
-        role_bindings(ctx),
+        rb_resource,
+        rb_resource | users_role,
+        rb_resource | groups_role,
         cluster_roles(ctx),
         crb_resource,
         crb_resource | users_cluster_role,
