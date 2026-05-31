@@ -128,9 +128,12 @@ def resource_definition_path(
     )
 
 
-def uid_path(kind, uid: str) -> ConditionalEdgePath:
+def dynamic_path(kind, **kwargs) -> ConditionalEdgePath:
     node_kind = _TYPED_RESOURCE_KINDS.get(kind, nk.RESOURCE)
-    return match_by_properties(node_kind, uid=uid)
+    if node_kind == nk.RESOURCE:
+        kwargs["resource_kind"] = kind
+
+    return match_by_properties(node_kind, **kwargs)
 
 
 def resource_permission_path(

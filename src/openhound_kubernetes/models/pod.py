@@ -18,14 +18,13 @@ from openhound_kubernetes.graph import (
     K8SNodeProperties,
     Edge,
     EdgePath,
+    cluster_node_id,
+    dynamic_path,
+    labels_to_list,
+    match_by_properties,
 )
-from openhound_kubernetes.graph import cluster_node_id
-from openhound_kubernetes.graph import labels_to_list
-from openhound_kubernetes.graph import match_by_properties
-from openhound_kubernetes.graph import uid_path
-from openhound_kubernetes.kinds import edges as ek
+from openhound_kubernetes.kinds import edges as ek, nodes as nk
 from openhound_kubernetes.kinds import external as xk
-from openhound_kubernetes.kinds import nodes as nk
 from openhound_kubernetes.main import app
 from openhound_kubernetes.models.pod_enrichment import pod_enrichment_edges
 from openhound_kubernetes.models.volume import Volume as HostVolume
@@ -413,7 +412,7 @@ class Pod(BaseAsset):
         start_path = EdgePath(value=self.as_node.id, match_by="id")
         if self.metadata.owner_references:
             for owner in self.metadata.owner_references:
-                end_path = uid_path(
+                end_path = dynamic_path(
                     kind=owner.kind,
                     uid=owner.uid,
                 )
@@ -541,13 +540,13 @@ class Pod(BaseAsset):
 
     @property
     def edges(self) -> "Iterator[Edge]":
-        # yield from self._cluster_contains_edge
-        # yield from self._node_edge
-        # yield from self._namespace_edge
-        # yield from self._service_account_edge
+        yield from self._cluster_contains_edge
+        yield from self._node_edge
+        yield from self._namespace_edge
+        yield from self._service_account_edge
         yield from self._owned_by
-        # yield from self._volume_edges
-        # yield from self._secret_edges
-        # yield from self._config_map_edges
-        # yield from self._persistent_volume_claim_edges
+        yield from self._volume_edges
+        yield from self._secret_edges
+        yield from self._config_map_edges
+        yield from self._persistent_volume_claim_edges
         yield from pod_enrichment_edges(self)
