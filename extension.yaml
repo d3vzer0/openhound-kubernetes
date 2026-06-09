@@ -12,6 +12,12 @@ references:
   - name: OpenHound
     url: https://github.com/specterops/openhound
 
+
+credentials:
+  - name: kube_config
+    description: Path to the kubeconfig file
+    required: false
+
 parameters:
   - name: kube_config
     description: Path to the kubeconfig file
